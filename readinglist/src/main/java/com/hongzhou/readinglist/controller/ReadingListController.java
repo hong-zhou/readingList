@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.hongzhou.readinglist.config.AmazonProperties;
 import com.hongzhou.readinglist.domain.Book;
 import com.hongzhou.readinglist.repository.ReadingListRepository;
 
@@ -17,11 +18,14 @@ public class ReadingListController {
 
   private static final String reader = "hong";
   
+  	private AmazonProperties amazonProperties;
+  	
 	private ReadingListRepository readingListRepository;
 
 	@Autowired
-	public ReadingListController(ReadingListRepository readingListRepository) {
+	public ReadingListController(ReadingListRepository readingListRepository, AmazonProperties amazonProperties) {
 		this.readingListRepository = readingListRepository;
+		this.amazonProperties = amazonProperties;
 	}
 	
 	@RequestMapping(method=RequestMethod.GET)
@@ -30,6 +34,8 @@ public class ReadingListController {
 		List<Book> readingList = readingListRepository.findByReader(reader);
 		if (readingList != null) {
 			model.addAttribute("books", readingList);
+			model.addAttribute("reader", reader);
+			model.addAttribute("amazonID", amazonProperties.getAssociateId());
 		}
 		return "readingList";
 	}
