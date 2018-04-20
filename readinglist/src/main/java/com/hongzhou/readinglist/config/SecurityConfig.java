@@ -1,6 +1,7 @@
 package com.hongzhou.readinglist.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -29,7 +30,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-		auth.userDetailsService(new UserDetailsService() {
+		auth.userDetailsService(userDetailService());
+	}
+
+	@Bean
+	private UserDetailsService userDetailService() {
+		return new UserDetailsService() {
 			@Override
 			public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 				UserDetails userDetails = readerRepository.findOne(username);
@@ -38,7 +44,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				}
 				throw new UsernameNotFoundException("User '" + username + "' not found.");
 			}
-		});
+		};
 	}
 
 }
