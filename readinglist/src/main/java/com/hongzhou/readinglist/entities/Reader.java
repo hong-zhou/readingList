@@ -1,4 +1,4 @@
-package com.hongzhou.readinglist.domain;
+package com.hongzhou.readinglist.entities;
 
 import java.util.Arrays;
 import java.util.Collection;

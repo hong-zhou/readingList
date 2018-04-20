@@ -20,8 +20,8 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
 import com.hongzhou.readinglist.ReadinglistApplication;
-import com.hongzhou.readinglist.domain.Book;
-import com.hongzhou.readinglist.domain.Reader;
+import com.hongzhou.readinglist.entities.Book;
+import com.hongzhou.readinglist.entities.Reader;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = ReadinglistApplication.class)

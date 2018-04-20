@@ -7,7 +7,7 @@ import org.springframework.web.context.request.NativeWebRequest;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.method.support.ModelAndViewContainer;
 
-import com.hongzhou.readinglist.domain.Reader;
+import com.hongzhou.readinglist.entities.Reader;
 
 public class ReaderHandlerMethodArgumentResolver implements HandlerMethodArgumentResolver {
 	
