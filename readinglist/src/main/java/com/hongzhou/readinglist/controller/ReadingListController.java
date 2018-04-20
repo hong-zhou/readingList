@@ -15,7 +15,7 @@ import com.hongzhou.readinglist.domain.Reader;
 import com.hongzhou.readinglist.repository.ReadingListRepository;
 
 @Controller
-@RequestMapping("/readingList")
+@RequestMapping("/")
 @ConfigurationProperties("amazon")
 public class ReadingListController {
 

@@ -24,13 +24,26 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		http.authorizeRequests().antMatchers("/").access("hasRole('READER')").antMatchers("/**").permitAll().and()
-				.formLogin().loginPage("/login").failureUrl("/login?error=true");
+		http
+			.authorizeRequests()
+				.antMatchers("/").access("hasRole('READER')")
+				.antMatchers("/shutdown").access("hasRole('ADMIN')")
+				.antMatchers("/**").permitAll()
+			.and()
+				.formLogin()
+					.loginPage("/login")
+					.failureUrl("/login?error=true");
 	}
 
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-		auth.userDetailsService(userDetailService());
+		auth
+			.userDetailsService(userDetailService())
+			.and()
+			.inMemoryAuthentication()
+				.withUser("admin")
+				.password("secrect")
+				.roles("ADMIN", "READER");
 	}
 
 	@Bean
